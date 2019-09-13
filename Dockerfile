@@ -12,6 +12,7 @@ ENV PTSIMVersion="105-001-000-20190725"
 ENV G4WKDIR=/app
 ENV G4DIR=/app/geant4.${shortG4version}-install
 ENV PTSprojectDIRsrc=/src/PTSproject
+ENV PTSprojectDIRbud=/src/PTSproject-build
 ENV PTSprojectDIR=/app/PTSproject-install
 
 WORKDIR /app
@@ -52,7 +53,7 @@ sed -i 's/GetSize/GetActiveSize/g' ./PTSapps/DynamicPort/app/src/MyApplication.c
 ./buildToolkitIAEA.sh &&\
 ./buildDynamicIAEAMPI.sh &&\
 cd $G4DIR &&\
-rm -rf $PTSprojectDIRsrc"
+rm -rf $PTSprojectDIRbud"
 
 
 RUN ls $G4WKDIR/geant4.${shortG4version}-install
