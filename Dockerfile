@@ -16,6 +16,7 @@ ENV PTSprojectDIRbud=/src/PTSproject-build
 ENV PTSprojectDIR=/app/PTSproject-install
 
 WORKDIR /app
+ENV SoftwareSRC=/src
 
 RUN if [ ! -e ${G4WKDIR}/src ];then mkdir ${G4WKDIR}/src;fi
 RUN echo "G4WKDIR is: ${G4WKDIR}"
