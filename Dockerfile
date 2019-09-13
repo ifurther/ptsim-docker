@@ -44,10 +44,10 @@ exec "$@" \n'\
 RUN /bin/bash -c "source $G4WKDIR/entry-point.sh; \
 cd $PTSprojectDIRsrc && \
 cp script/buildDynamicIAEAMPI.sh . && \
-sed -i 's/\..\/\..\/\../\/app/g' ./buildToolkitIAEA.sh && \
-sed -i 's/\..\/\..\/\../\/app/g' ./buildToolkitIAEA.sh && \
+sed -i 's/\..\/\..\/PTSproject-install/\/app\/PTSproject-install/g' ./buildToolkitIAEA.sh && \
+sed -i 's/\..\/\..\/PTSproject-install/\/app\/PTSproject-install/g' ./buildDynamicIAEAMPI.sh && \
 sed -i 's/^make/make \-j\`grep \-c \^processor\ \/proc\/cpuinfo\`/g' ./buildToolkitIAEA.sh && \
-sed -i 's/^make/make \-j\`grep \-c \^processor\ \/proc\/cpuinfo\`/g' ./buildToolkitIAEA.sh && \
+sed -i 's/^make/make \-j\`grep \-c \^processor\ \/proc\/cpuinfo\`/g' ./buildDynamicIAEAMPI.sh && \
 sed -i 's/GetSize/GetActiveSize/g' ./PTSapps/DynamicPort/app/src/MyApplication.cc && \
 ./buildToolkitIAEA.sh &&\
 ./buildDynamicIAEAMPI.sh &&\
@@ -56,3 +56,6 @@ rm -rf $PTSprojectDIRsrc"
 
 
 RUN ls $G4WKDIR/geant4.${shortG4version}-install
+
+ENTRYPOINT ["/app/entry-point.sh"]
+CMD [ "/bin/bash" ]
