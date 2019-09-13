@@ -19,9 +19,14 @@ WORKDIR /app
 RUN if [ ! -e ${G4WKDIR}/src ];then mkdir ${G4WKDIR}/src;fi
 RUN echo "G4WKDIR is: ${G4WKDIR}"
 
-#ADD PTSproject-${PTSIMVersion}.tar.gz /src
-RUN wget https://wiki.kek.jp/download/attachments/5343876/PTSproject-105-001-000-20190725.tar.gz?version=2&modificationDate=1564700831891&api=v2 | \
-tar xf PTSproject-${PTSIMVersion}.tar.gz -C |rm -rf PTSproject-${PTSIMVersion}.tar.gz
+ADD PTSproject-${PTSIMVersion}.tar.gz /src
+#RUN wget https://wiki.kek.jp/download/attachments/5343876/PTSproject-105-001-000-20190725.tar.gz?version=2&modificationDate=1564700831891&api=v2 | \
+#tar xf PTSproject-${PTSIMVersion}.tar.gz -C /src|rm -rf PTSproject-${PTSIMVersion}.tar.gz
+
+RUN wget https://root.cern/download/root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4.tar.gz && \
+tar xf root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4.tar.gz -C /app &&rm -rf root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4.tar.gz
+
+RUN ls /app
 
 RUN /bin/bash -c "source $G4WKDIR/entry-point.sh; \
 cd $PTSprojectDIRsrc && \
