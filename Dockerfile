@@ -28,6 +28,19 @@ tar xf root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4.tar.gz -C /app &&rm -rf root_v
 
 RUN ls /app
 
+RUN rm $G4WKDIR/entry-point.sh
+
+RUN echo  '\n\
+#!/bin/bash\n\
+set -e \n\
+\n\
+source $G4DIR/bin/geant4.sh\n\
+source $G4DIR/share/Geant4-${shortG4version}/geant4make/geant4make.sh \n\
+source $G4WKDIR/root/bin/thisroot.sh\n\
+\n\
+exec "$@" \n'\
+>$G4WKDIR/entry-point.sh
+
 RUN /bin/bash -c "source $G4WKDIR/entry-point.sh; \
 cd $PTSprojectDIRsrc && \
 cp script/buildDynamicIAEAMPI.sh . && \
