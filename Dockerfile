@@ -32,15 +32,16 @@ RUN ls /app
 
 RUN rm $G4WKDIR/entry-point.sh
 
-RUN  echo  -e "\n\
+RUN echo -e '\n\
 #!/bin/bash\n\
 set -e \n\
 \n\
 source $G4DIR/bin/geant4.sh\n\
-source $G4DIR/share/Geant4-$shortG4version/geant4make/geant4make.sh \n\
+source $G4DIR/share/Geant4-${shortG4version}/geant4make/geant4make.sh \n\
 source $G4WKDIR/root/bin/thisroot.sh \n\
 \n\
-exec "$@" \n">$G4WKDIR/entry-point.sh
+exec "$@" \n'\
+>$G4WKDIR/entry-point.sh
 
 RUN chmod +x $G4WKDIR/entry-point.sh
 
