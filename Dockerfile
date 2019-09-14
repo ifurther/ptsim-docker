@@ -21,9 +21,9 @@ ENV SoftwareSRC=/src
 RUN if [ ! -e ${G4WKDIR}/src ];then mkdir ${G4WKDIR}/src;fi
 RUN echo "G4WKDIR is: ${G4WKDIR}"
 
-#ADD PTSproject-${PTSIMVersion}.tar.gz /src
-RUN wget https://wiki.kek.jp/download/attachments/5343876/PTSproject-105-001-000-20190725.tar.gz?version=2&modificationDate=1564700831891&api=v2 | \
-tar xf PTSproject-${PTSIMVersion}.tar.gz -C /src|rm -rf PTSproject-${PTSIMVersion}.tar.gz
+ADD PTSproject-${PTSIMVersion}.tar.gz /src
+#RUN wget https://wiki.kek.jp/download/attachments/5343876/PTSproject-105-001-000-20190725.tar.gz?version=2&modificationDate=1564700831891&api=v2 | \
+#tar xf PTSproject-${PTSIMVersion}.tar.gz -C /src|rm -rf PTSproject-${PTSIMVersion}.tar.gz
 
 RUN wget https://root.cern/download/root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4.tar.gz && \
 tar xf root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4.tar.gz -C /app &&rm -rf root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4.tar.gz
@@ -37,13 +37,12 @@ RUN  echo  -e "\n\
 set -e \n\
 \n\
 source $G4DIR/bin/geant4.sh\n\
-source $G4DIR/share/Geant4-${shortG4version}/geant4make/geant4make.sh \n\
+source $G4DIR/share/Geant4-$shortG4version/geant4make/geant4make.sh \n\
 source $G4WKDIR/root/bin/thisroot.sh\n\
 \n\
-exec "$@" \n">./entry-point.sh
+exec "$@" \n">$G4WKDIR/entry-point.sh
 
-
-RUN chmod +x /app/entry-point.sh
+RUN chmod +x $G4WKDIR/entry-point.sh
 
 RUN /bin/bash -c "source $G4WKDIR/entry-point.sh; \
 cd $PTSprojectDIRsrc && \
