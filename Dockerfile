@@ -1,7 +1,7 @@
 ARG IMAGE_FROM=10.5.1-g4mpi
 
 FROM ifurther/geant4:${IMAGE_FROM}
-LABEL maintainer="Further Lin <geant4ro.ot@gmail.com>"
+LABEL maintainer="Further Lin <55025025+ifurther@users.noreply.github.com>"
 
 RUN sed --in-place --regexp-extended "s/(\/\/)(archive\.ubuntu)/\1tw.\2/" /etc/apt/sources.list 
 	
