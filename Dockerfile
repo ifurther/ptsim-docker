@@ -63,5 +63,5 @@ RUN ls $G4WKDIR/geant4.${shortG4version}-install
 
 RUN ls $PTSprojectDIR
 
-ENTRYPOINT ["/app/entry-point.sh"]
+#ENTRYPOINT ["/app/entry-point.sh"]
 #CMD [ "/bin/bash" ]
